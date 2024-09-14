@@ -65,6 +65,10 @@ const LoginForm = () => {
     }
   };
 
+  const handleGoogleSignIn = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
+  };
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -112,7 +116,11 @@ const LoginForm = () => {
           </div>
 
           <div className="col-12">
-            <button className="btn-twentyTwo w-100 fw-500 tran3s text-uppercase mt-30">
+            <button
+              type="button"
+              className="btn-twentyTwo w-100 fw-500 tran3s text-uppercase mt-30"
+              onClick={handleGoogleSignIn}
+            >
               Sign in with Google
             </button>
           </div>
