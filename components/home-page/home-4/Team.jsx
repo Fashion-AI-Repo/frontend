@@ -2,7 +2,7 @@ const Team = () => {
   const teamMembers = [
     {
       imgSrc: "/images/team/img_01.jpg",
-      name: "Rashe ka",
+      name: "",
       role: "Marketing Head",
       delay: "100",
     },

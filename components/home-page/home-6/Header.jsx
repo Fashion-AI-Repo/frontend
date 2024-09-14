@@ -25,9 +25,8 @@ const Header = () => {
 
   return (
     <header
-      className={`theme-main-menu sticky-menu theme-menu-two ${
-        navbar ? "fixed" : ""
-      }`}
+      className={`theme-main-menu sticky-menu theme-menu-two ${navbar ? "fixed" : ""
+        }`}
     >
       <div className="inner-content position-relative">
         <div className="d-flex align-items-center justify-content-between">
@@ -45,13 +44,21 @@ const Header = () => {
             {/* <Link
               href="https://test-dem.auth.eu-north-1.amazoncognito.com/oauth2/authorize?client_id=2fc4rdgddt8i7abcdniv673ipe&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fjano-dashboard.onrender.com%2Fhome%2Fsass-product"
               className="login-btn-one fs-17 fw-500 tran3s me-3"
+            > */}
+            <Link
+              href="/login"
+              className="login-btn-one fs-17 fw-500 tran3s me-3"
             >
               Login
-            </Link> */}
+            </Link>
             <Link
-              href="/contact"
+              href="/signup"
               className="contact-btn-two fs-17 fw-500 tran3s d-none d-lg-block"
             >
+            {/* <Link
+              href=""
+              className="login-btn-one fs-17 fw-500 tran3s me-3"
+            > */} 
               Sign Up
             </Link>
           </div>
