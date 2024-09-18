@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Import the correct useRouter for Next.js 13+
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Snackbar, Alert } from "@mui/material";
 
@@ -24,7 +24,6 @@ const signIn = async (email, password) => {
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
@@ -32,8 +31,24 @@ const LoginForm = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setIsMounted(true); // Ensures that `useRouter` runs after component mounts
-  }, []);
+    const handleGoogleCallback = async () => {
+      const { token } = router.query;  // Fetch the token from URL query
+
+      if (token) {
+        try {
+          // Store token in localStorage
+          localStorage.setItem("authToken", token);
+
+          // Redirect to the homepage or dashboard
+          router.push("/");
+        } catch (error) {
+          console.error("Error handling Google callback:", error);
+        }
+      }
+    };
+
+    handleGoogleCallback();
+  }, [router.query]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,17 +59,15 @@ const LoginForm = () => {
       const result = await signIn(email, password);
       console.log("Sign in successful:", result);
 
-      if (isMounted) {
-        // Show success Snackbar
-        setSnackbarMessage("Login successful!");
-        setSnackbarSeverity("success");
-        setSnackbarOpen(true);
+      // Show success Snackbar
+      setSnackbarMessage("Login successful!");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
 
-        // Redirect after a short delay
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
-      }
+      // Redirect after a short delay
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
     } catch (error) {
       console.error("Error signing in:", error);
       

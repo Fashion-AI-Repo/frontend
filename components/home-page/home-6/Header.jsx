@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import MainMenu from "../../header/MainMenu";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const router = useRouter();
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -22,6 +26,25 @@ const Header = () => {
       window.removeEventListener("scroll", changeBackground);
     };
   }, []);
+
+  useEffect(() => {
+    // Check if user is logged in by checking the token in localStorage
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsLoggedIn(true);
+
+      // Optionally, you can fetch user info like name from the token or from an API
+      const storedUserName = localStorage.getItem("userName"); // Assuming username is stored in localStorage
+      setUserName(storedUserName || "User"); // Default to "User" if the name is not available
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userName");
+    setIsLoggedIn(false);
+    router.push("/login"); // Redirect to login page
+  };
 
   return (
     <header
@@ -41,26 +64,32 @@ const Header = () => {
             </Link>
           </div>
           <div className="right-widget ms-auto d-flex align-items-center order-lg-3">
-            {/* <Link
-              href="https://test-dem.auth.eu-north-1.amazoncognito.com/oauth2/authorize?client_id=2fc4rdgddt8i7abcdniv673ipe&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fjano-dashboard.onrender.com%2Fhome%2Fsass-product"
-              className="login-btn-one fs-17 fw-500 tran3s me-3"
-            > */}
-            <Link
-              href="/login"
-              className="login-btn-one fs-17 fw-500 tran3s me-3"
-            >
-              Login
-            </Link>
-            <Link
-              href="/signup"
-              className="contact-btn-two fs-17 fw-500 tran3s d-none d-lg-block"
-            >
-            {/* <Link
-              href=""
-              className="login-btn-one fs-17 fw-500 tran3s me-3"
-            > */} 
-              Sign Up
-            </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link
+                  href="/login"
+                  className="login-btn-one fs-17 fw-500 tran3s me-3"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/signup"
+                  className="contact-btn-two fs-17 fw-500 tran3s d-none d-lg-block"
+                >
+                  Sign Up
+                </Link>
+              </>
+            ) : (
+              <div className="d-flex align-items-center">
+                <span className="fs-17 fw-500 me-3">Hello, {userName}</span>
+                <button
+                  onClick={handleLogout}
+                  className="login-btn-one fs-17 fw-500 tran3s"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
           {/* /.right-widget */}
           <MainMenu />
