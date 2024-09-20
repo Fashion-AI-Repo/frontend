@@ -5,8 +5,7 @@ import axios from "axios";
 import { Snackbar, Alert, CircularProgress } from "@mui/material";
 import styles from "./PopUp.module.css";
 
-
-const PopUp = () => {
+const PopUp = ({ onClose }) => {
   const [formData, setFormData] = useState({
     item_code: "",
     category_id: "",
@@ -23,13 +22,13 @@ const PopUp = () => {
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
-    severity: "success", // or "error"
+    severity: "success",
   });
 
   const [categories, setCategories] = useState([]);
   const [styleApi, setStyles] = useState([]);
   const [seasons, setSeasons] = useState([]);
-  const [colors, setColors] = useState([]); // Added colors state
+  const [colors, setColors] = useState([]);
   const [years] = useState(["2023", "2024", "2025"]);
 
   useEffect(() => {
@@ -39,13 +38,12 @@ const PopUp = () => {
           axios.get("http://localhost:8000/api/fashion/categories"),
           axios.get("http://localhost:8000/api/fashion/styleApi"),
           axios.get("http://localhost:8000/api/fashion/seasons"),
-          axios.get("http://localhost:8000/api/fashion/colors"), // Fetching colors
+          axios.get("http://localhost:8000/api/fashion/colors"),
         ]);
-        // Extract and set the actual data from the response
         setCategories(categoriesResponse?.data);
         setStyles(stylesResponse?.data);
         setSeasons(seasonsResponse?.data);
-        setColors(colorsResponse?.data); // Setting colors data
+        setColors(colorsResponse?.data);
       } catch (error) {
         console.error("Error fetching dropdown options:", error);
       }
@@ -56,21 +54,13 @@ const PopUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData({
-        ...formData,
-        image: file,
-      });
-
-      // Create a preview URL for the selected image
+      setFormData({ ...formData, image: file });
       const imageUrl = URL.createObjectURL(file);
       setPreviewImage(imageUrl);
     }
@@ -88,7 +78,7 @@ const PopUp = () => {
       return;
     }
 
-    setLoading(true);  // Show loader
+    setLoading(true);
     const form = new FormData();
 
     Object.keys(formData).forEach((key) => {
@@ -110,7 +100,7 @@ const PopUp = () => {
           message: "Cloth saved successfully!",
           severity: "success",
         });
-        setPreviewImage(null);  // Remove the preview image
+        setPreviewImage(null);
         setFormData({
           item_code: "",
           category_id: "",
@@ -121,6 +111,7 @@ const PopUp = () => {
           color_id: "",
           image: null,
         });
+        onClose(); // Close the popup on success
       } else {
         setSnackbar({
           open: true,
@@ -135,137 +126,126 @@ const PopUp = () => {
         severity: "error",
       });
     } finally {
-      setLoading(false);  // Hide loader after request completes
+      setLoading(false);
     }
   };
-
 
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
 
   const handleColorSelect = (colorId) => {
-    setFormData({
-      ...formData,
-      color_id: colorId, // Set selected color ID
-    });
+    setFormData({ ...formData, color_id: colorId });
   };
-  // container
+
   return (
-    <div className="hero-banner-two position-relative pt-120 lg-pt-200 md-pt-150">
-      <div className={styles.container}>
-        <div className={styles.uploadSection}>
-          <label className={styles.uploadLabel}>
-            <input type="file" name="image" onChange={handleFileChange} className={styles.fileInput} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhFzzdBy2IJIrZIlgmdqrwfOqDuESRnl0pRA&s" alt="upload icon" className={styles.uploadIcon} />
-          </label>
-          {previewImage && (
-            <div className={styles.imagePreview}>
-              <img src={previewImage} alt="Preview" className={styles.previewImg} />
-            </div>
-          )}
-        </div>
-        <div className={styles.formSection}>
-          <form onSubmit={handleSubmit}>
-            {/* Other form fields */}
-            <div className={styles.formGroup}>
-              <label>Item Code:</label>
-              <input
-                type="text"
-                name="item_code"
-                value={formData.item_code}
-                onChange={handleChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Category:</label>
-              <select
-                name="category_id"
-                value={formData.category_id}
-                onChange={handleChange}
-                required
-                className={styles.select}
-              >
-                <option value="">Select</option>
-                {categories?.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.category_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.formGroup}>
-              <label>Style:</label>
-              <select name="style_id" value={formData.style_id} onChange={handleChange} required className={styles.select}>
-                <option value="">Select</option>
-                {styleApi?.map((style) => (
-                  <option key={style._id} value={style._id}>{style.style_name}</option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.formGroup}>
-              <label>Year:</label>
-              <select name="year" value={formData.year} onChange={handleChange} required className={styles.select}>
-                <option value="">Select</option>
-                {years?.map((year) => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.formGroup}>
-              <label>Season:</label>
-              <select name="season_id" value={formData.season_id} onChange={handleChange} required className={styles.select}>
-                <option value="">Select</option>
-                {seasons?.map((season) => (
-                  <option key={season._id} value={season._id}>{season.season_name}</option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.formGroup}>
-              <label>Price:</label>
-              <input
-                type="text"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                required
-                className={styles.input}
-                placeholder="$"
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Color:</label>
-              <div className={styles.colorOptions}>
-                {colors?.map((color) => (
-                  <div
-                    key={color._id}
-                    className={`${styles.colorOption} ${formData.color_id === color._id ? styles.selected : ""}`} // Apply 'selected' class if chosen
-                    style={{ backgroundColor: color.hexadecimal_value }}
-                    onClick={() => handleColorSelect(color._id)}
-                  >
-                    <span className={styles.colorLabel}>{color.color_name}</span>
-                  </div>
-                ))}
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.columns}>
+          <div className={styles.uploadSection}>
+            <label className={styles.uploadLabel}>
+              <input type="file" name="image" onChange={handleFileChange} className={styles.fileInput} />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhFzzdBy2IJIrZIlgmdqrwfOqDuESRnl0pRA&s" alt="upload icon" className={styles.uploadIcon} />
+            </label>
+            {previewImage && (
+              <div className={styles.imagePreview}>
+                <img src={previewImage} alt="Preview" className={styles.previewImg} />
               </div>
-            </div>
-            <br />
-            <button type="submit" className={styles.submitButton} disabled={loading}>
-              {loading ? <CircularProgress size={24} /> : "Upload"}
-            </button>
-          </form>
+            )}
+          </div>
+          <div className={styles.formSection}>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formGroup}>
+                <label>Item Code:</label>
+                <input
+                  type="text"
+                  name="item_code"
+                  value={formData.item_code}
+                  onChange={handleChange}
+                  required
+                  className={styles.input}
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label>Category:</label>
+                <select
+                  name="category_id"
+                  value={formData.category_id}
+                  onChange={handleChange}
+                  required
+                  className={styles.select}
+                >
+                  <option value="">Select</option>
+                  {categories?.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.category_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Style:</label>
+                <select name="style_id" value={formData.style_id} onChange={handleChange} required className={styles.select}>
+                  <option value="">Select</option>
+                  {styleApi?.map((style) => (
+                    <option key={style._id} value={style._id}>{style.style_name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Year:</label>
+                <select name="year" value={formData.year} onChange={handleChange} required className={styles.select}>
+                  <option value="">Select</option>
+                  {years?.map((year) => (
+                    <option key={year} value={year}>{year}</option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Season:</label>
+                <select name="season_id" value={formData.season_id} onChange={handleChange} required className={styles.select}>
+                  <option value="">Select</option>
+                  {seasons?.map((season) => (
+                    <option key={season._id} value={season._id}>{season.season_name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Price:</label>
+                <input
+                  type="text"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  required
+                  className={styles.input}
+                  placeholder="$"
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label>Color:</label>
+                <div className={styles.colorOptions}>
+                  {colors?.map((color) => (
+                    <div
+                      key={color._id}
+                      className={`${styles.colorOption} ${formData.color_id === color._id ? styles.selected : ""}`}
+                      style={{ backgroundColor: color.hexadecimal_value }}
+                      onClick={() => handleColorSelect(color._id)}
+                    >
+                      <span className={styles.colorLabel}>{color.color_name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button type="submit" className={styles.submitButton} disabled={loading}>
+                {loading ? <CircularProgress size={24} /> : "Upload"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
-
-
-      {/* MUI Snackbar for messages */}
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-      >
+      <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
           {snackbar.message}
         </Alert>
