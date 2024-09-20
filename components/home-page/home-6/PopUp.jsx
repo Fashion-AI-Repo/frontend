@@ -31,15 +31,18 @@ const PopUp = ({ onClose }) => {
   const [colors, setColors] = useState([]);
   const [years] = useState(["2023", "2024", "2025"]);
 
+
+
   useEffect(() => {
     const fetchDropdownOptions = async () => {
       try {
         const [categoriesResponse, stylesResponse, seasonsResponse, colorsResponse] = await Promise.all([
-          axios.get("http://localhost:8000/api/fashion/categories"),
-          axios.get("http://localhost:8000/api/fashion/styleApi"),
-          axios.get("http://localhost:8000/api/fashion/seasons"),
-          axios.get("http://localhost:8000/api/fashion/colors"),
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/fashion/categories`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/fashion/styles`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/fashion/seasons`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/fashion/colors`),
         ]);
+        console.log(categoriesResponse, " categoriesResponse")
         setCategories(categoriesResponse?.data);
         setStyles(stylesResponse?.data);
         setSeasons(seasonsResponse?.data);
@@ -89,7 +92,7 @@ const PopUp = ({ onClose }) => {
       const token = localStorage.getItem("authToken");
 
       if (token) {
-        await axios.post("http://localhost:8000/api/fashion/clothes", form, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/fashion/clothes`, form, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -111,7 +114,7 @@ const PopUp = ({ onClose }) => {
           color_id: "",
           image: null,
         });
-        onClose(); // Close the popup on success
+        onClose();
       } else {
         setSnackbar({
           open: true,

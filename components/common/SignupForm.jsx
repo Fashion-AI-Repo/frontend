@@ -40,7 +40,8 @@ const SignupForm = () => {
     const payload = { displayName, email, password };
 
     try {
-      const response = await axios.post("http://localhost:8000/auth/register", payload);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, payload);
+      // const response = await axios.post("http://localhost:8000/auth/register", payload);
       console.log("Registration successful:", response.data);
 
       setSuccess("Registration successful");
