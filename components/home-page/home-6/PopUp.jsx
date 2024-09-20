@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./popup.css";
-import { Snackbar, Alert, CircularProgress } from "@mui/material"; 
-import uploadIcon from '../../../public/upload.png';
+import { Snackbar, Alert, CircularProgress } from "@mui/material";
+import styles from "./PopUp.module.css";
+
 
 const PopUp = () => {
   const [formData, setFormData] = useState({
@@ -14,12 +14,12 @@ const PopUp = () => {
     year: "",
     season_id: "",
     price: "",
-    color_id: "", 
+    color_id: "",
     image: null,
   });
 
-  const [loading, setLoading] = useState(false); 
-  const [previewImage, setPreviewImage] = useState(null); 
+  const [loading, setLoading] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -27,7 +27,7 @@ const PopUp = () => {
   });
 
   const [categories, setCategories] = useState([]);
-  const [styles, setStyles] = useState([]);
+  const [styleApi, setStyles] = useState([]);
   const [seasons, setSeasons] = useState([]);
   const [colors, setColors] = useState([]); // Added colors state
   const [years] = useState(["2023", "2024", "2025"]);
@@ -37,7 +37,7 @@ const PopUp = () => {
       try {
         const [categoriesResponse, stylesResponse, seasonsResponse, colorsResponse] = await Promise.all([
           axios.get("http://localhost:8000/api/fashion/categories"),
-          axios.get("http://localhost:8000/api/fashion/styles"),
+          axios.get("http://localhost:8000/api/fashion/styleApi"),
           axios.get("http://localhost:8000/api/fashion/seasons"),
           axios.get("http://localhost:8000/api/fashion/colors"), // Fetching colors
         ]);
@@ -78,16 +78,26 @@ const PopUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.image) {
+      setSnackbar({
+        open: true,
+        message: "Please upload an image.",
+        severity: "error",
+      });
+      return;
+    }
+
     setLoading(true);  // Show loader
     const form = new FormData();
-    
+
     Object.keys(formData).forEach((key) => {
       form.append(key, formData[key]);
     });
-  
+
     try {
       const token = localStorage.getItem("authToken");
-  
+
       if (token) {
         await axios.post("http://localhost:8000/api/fashion/clothes", form, {
           headers: {
@@ -128,7 +138,8 @@ const PopUp = () => {
       setLoading(false);  // Hide loader after request completes
     }
   };
-  
+
+
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
@@ -139,25 +150,25 @@ const PopUp = () => {
       color_id: colorId, // Set selected color ID
     });
   };
-
+  // container
   return (
     <div className="hero-banner-two position-relative pt-120 lg-pt-200 md-pt-150">
-      <div className="container">
-        <div className="uploadSection">
-          <label className="uploadLabel">
-            <input type="file" name="image" onChange={handleFileChange} className="fileInput" />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhFzzdBy2IJIrZIlgmdqrwfOqDuESRnl0pRA&s" alt="upload icon" className="uploadIcon" />
+      <div className={styles.container}>
+        <div className={styles.uploadSection}>
+          <label className={styles.uploadLabel}>
+            <input type="file" name="image" onChange={handleFileChange} className={styles.fileInput} />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhFzzdBy2IJIrZIlgmdqrwfOqDuESRnl0pRA&s" alt="upload icon" className={styles.uploadIcon} />
           </label>
           {previewImage && (
-            <div className="imagePreview">
-              <img src={previewImage} alt="Preview" className="previewImg" />
+            <div className={styles.imagePreview}>
+              <img src={previewImage} alt="Preview" className={styles.previewImg} />
             </div>
           )}
         </div>
-        <div className="formSection">
+        <div className={styles.formSection}>
           <form onSubmit={handleSubmit}>
             {/* Other form fields */}
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Item Code:</label>
               <input
                 type="text"
@@ -165,17 +176,17 @@ const PopUp = () => {
                 value={formData.item_code}
                 onChange={handleChange}
                 required
-                className="input"
+                className={styles.input}
               />
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Category:</label>
               <select
                 name="category_id"
                 value={formData.category_id}
                 onChange={handleChange}
                 required
-                className="select"
+                className={styles.select}
               >
                 <option value="">Select</option>
                 {categories?.map((category) => (
@@ -185,34 +196,34 @@ const PopUp = () => {
                 ))}
               </select>
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Style:</label>
-              <select name="style_id" value={formData.style_id} onChange={handleChange} required className="select">
+              <select name="style_id" value={formData.style_id} onChange={handleChange} required className={styles.select}>
                 <option value="">Select</option>
-                {styles?.map((style) => (
+                {styleApi?.map((style) => (
                   <option key={style._id} value={style._id}>{style.style_name}</option>
                 ))}
               </select>
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Year:</label>
-              <select name="year" value={formData.year} onChange={handleChange} required className="select">
+              <select name="year" value={formData.year} onChange={handleChange} required className={styles.select}>
                 <option value="">Select</option>
                 {years?.map((year) => (
                   <option key={year} value={year}>{year}</option>
                 ))}
               </select>
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Season:</label>
-              <select name="season_id" value={formData.season_id} onChange={handleChange} required className="select">
+              <select name="season_id" value={formData.season_id} onChange={handleChange} required className={styles.select}>
                 <option value="">Select</option>
                 {seasons?.map((season) => (
                   <option key={season._id} value={season._id}>{season.season_name}</option>
                 ))}
               </select>
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Price:</label>
               <input
                 type="text"
@@ -220,31 +231,34 @@ const PopUp = () => {
                 value={formData.price}
                 onChange={handleChange}
                 required
-                className="input"
+                className={styles.input}
                 placeholder="$"
               />
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Color:</label>
-              <div className="colorOptions">
+              <div className={styles.colorOptions}>
                 {colors?.map((color) => (
                   <div
                     key={color._id}
-                    className="colorOption"
+                    className={`${styles.colorOption} ${formData.color_id === color._id ? styles.selected : ""}`} // Apply 'selected' class if chosen
                     style={{ backgroundColor: color.hexadecimal_value }}
-                    onClick={() => handleColorSelect(color._id)} 
+                    onClick={() => handleColorSelect(color._id)}
                   >
-                    <span>{color.color_name}</span>
+                    <span className={styles.colorLabel}>{color.color_name}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <button type="submit" className="submitButton" disabled={loading}>
+            <br />
+            <button type="submit" className={styles.submitButton} disabled={loading}>
               {loading ? <CircularProgress size={24} /> : "Upload"}
             </button>
           </form>
         </div>
       </div>
+
+
 
       {/* MUI Snackbar for messages */}
       <Snackbar

@@ -60,11 +60,38 @@
   }
   
   .colorOption {
-    width: 20px;
-    height: 20px;
+    width: 40px; /* Increased size for better visibility */
+    height: 40px;
     border-radius: 50%;
     border: 2px solid #000;
+    cursor: pointer; /* Show pointer cursor to indicate it's clickable */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
   }
+  
+  .colorOption:hover {
+    transform: scale(1.1); /* Slight scale on hover */
+  }
+  
+  .colorOption.selected {
+    border: 4px solid #007bff; /* Highlight selected color */
+  }
+  
+  .colorLabel {
+    display: none; /* Hide text inside the circle */
+  }
+  
+  .colorOption.selected .colorLabel {
+    display: block; /* Show label for the selected option */
+    position: absolute;
+    top: 50px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
   
   .submitButton {
     background-color: #ff7f50;
@@ -82,4 +109,5 @@
   .success {
     color: green;
   }
+  
   

@@ -32,21 +32,27 @@ const LoginForm = () => {
 
   useEffect(() => {
     const handleGoogleCallback = async () => {
-      const { token } = router.query;  // Fetch the token from URL query
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get("token");
 
       if (token) {
         try {
-          // Store token in localStorage
           localStorage.setItem("authToken", token);
 
+          // Show success message
+          setSnackbarMessage("Google sign-in successful!");
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
+
           // Redirect to the homepage or dashboard
-          router.push("/");
+          setTimeout(() => {
+            router.push("/");
+          }, 1000);
         } catch (error) {
           console.error("Error handling Google callback:", error);
         }
       }
     };
-
     handleGoogleCallback();
   }, [router.query]);
 

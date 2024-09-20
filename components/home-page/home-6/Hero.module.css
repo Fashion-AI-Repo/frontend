@@ -1,0 +1,59 @@
+.container {
+  width: 100%;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+}
+
+.colors {
+  display: flex;
+  align-items: center;
+}
+
+.colorOptions {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.colorOption {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.generation {
+  width: 60%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.imageGrid {
+  display: flex;
+  gap: 10px;
+}
+
+.itemCard {
+  width: 35%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 20px;
+}
