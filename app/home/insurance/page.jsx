@@ -17,11 +17,11 @@ const Insurance = () => {
 
       <Main/>
       
-      {/* <Hero /> */}
+      <Hero />
 
       {/* <Grid /> */}
 
-      <PopUp/>
+      {/* <PopUp/> */}
 
 
 
