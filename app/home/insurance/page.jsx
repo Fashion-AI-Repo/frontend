@@ -21,7 +21,7 @@ const Insurance = () => {
 
       {/* <Grid /> */}
 
-      {/* <PopUp/> */}
+      <PopUp/>
 
 
 
