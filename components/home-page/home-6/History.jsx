@@ -59,7 +59,7 @@ import {
               fontFamily: "Inter",
             }}
           >
-            <NavbarElements />
+            {/* <NavbarElements /> */}
             <div
               style={{
                 alignSelf: "stretch",

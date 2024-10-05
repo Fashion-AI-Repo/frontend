@@ -16,6 +16,11 @@ import {
 import FrameComponent from "./FrameComponent";
 import Component2 from "./Component2";
 import Component1 from "./Component1";
+import Sidebar from "./Sidebar";
+import MenWomen from "./Componets/MenWomen";
+import Footer from "./Componets/Footer";
+import ModelDressingRoom from "./Componets/ModelDressingRoom";
+
 
 const ECommerceProductsSelect = () => {
   return (
@@ -103,211 +108,16 @@ const ECommerceProductsSelect = () => {
                     padding: "0px 58px",
                   }}
                 >
-                  <div
-                    style={{
-                      flex: "1",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-start",
-                      gap: "10px",
-                    }}
-                  >
-                    <a
-                      style={{
-                        textDecoration: "none",
-                        position: "relative",
-                        textTransform: "uppercase",
-                        fontWeight: "600",
-                        color: "inherit",
-                      }}
-                    >
-                      women
-                    </a>
-                    <div
-                      style={{
-                        alignSelf: "stretch",
-                        position: "relative",
-                        textTransform: "uppercase",
-                        color: "#808080",
-                      }}
-                    >
-                      men
-                    </div>
-                  </div>
+                  {/* men&women */}
+                  <MenWomen />
                 </div>
-                <div
-                  style={{
-                    alignSelf: "stretch",
-                    flex: "1",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "flex-start",
-                    justifyContent: "flex-end",
-                    padding: "30.5px 27px 30px",
-                    position: "relative",
-                    fontSize: "18px",
-                    color: "#808080",
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "100%",
-                      position: "absolute",
-                      margin: "0",
-                      top: "0px",
-                      right: "0px",
-                      bottom: "0px",
-                      left: "0px",
-                      borderRadius: "0px 20px 20px 0px",
-                      backgroundColor: "rgba(9, 15, 50, 0.05)",
-                    }}
-                  />
-                  <div
-                    style={{
-                      height: "1016px",
-                      width: "205px",
-                      overflow: "hidden",
-                      flexShrink: "0",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-start",
-                      padding: "49px 0px 9px",
-                      boxSizing: "border-box",
-                      gap: "29.8px",
-                      zIndex: "1",
-                    }}
-                  >
-                    <div
-                      style={{
-                        marginTop: "-52px",
-                        position: "relative",
-                        fontWeight: "600",
-                        color: "#ff733b",
-                      }}
-                    >
-                      All categories
-                    </div>
-                    <div style={{ position: "relative" }}>Dresses</div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "89px",
-                      }}
-                    >
-                      Jumpsuits
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "69px",
-                      }}
-                    >
-                      Blouses
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "51px",
-                      }}
-                    >
-                      Shirts
-                    </div>
-                    <div style={{ position: "relative" }}>T-shirts</div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "85px",
-                      }}
-                    >
-                      Tank tops
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "43px",
-                      }}
-                    >
-                      Tops
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "81px",
-                      }}
-                    >
-                      Sweaters
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "102px",
-                      }}
-                    >
-                      Sweatshirts
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "88px",
-                      }}
-                    >
-                      Cardigans
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "64px",
-                      }}
-                    >
-                      Blazers
-                    </div>
-                    <div style={{ position: "relative" }}>Jackets</div>
-                    <div style={{ position: "relative" }}>Coats</div>
-                    <div style={{ position: "relative" }}>Pants</div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "53px",
-                      }}
-                    >
-                      Jeans
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "55px",
-                      }}
-                    >
-                      Tights
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                        minWidth: "55px",
-                      }}
-                    >
-                      Bodys
-                    </div>
-                    <div style={{ position: "relative" }}>Shorts</div>
-                    <div style={{ position: "relative" }}>Skirts</div>
-                  </div>
-                </div>
+
+                {/* sidebar */}
+                <Sidebar />
               </div>
+
+
+              {/* cards */}
               <div
                 style={{
                   flex: "1",
@@ -368,7 +178,10 @@ const ECommerceProductsSelect = () => {
                           gap: "33.4px",
                         }}
                       >
-                        <TextField
+
+                        {/* search bar */}
+
+                        {/* <TextField
                           style={{
                             border: "none",
                             backgroundColor: "transparent",
@@ -394,16 +207,15 @@ const ECommerceProductsSelect = () => {
                             },
                             width: "235px",
                           }}
-                        />
-                        
+                        /> */}
+
                         <div
                           style={{
                             alignSelf: "stretch",
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "flex-start",
-                            justifyContent: "flex-start",
-                            gap: "15px",
+                            justifyContent: "flex-start"
                           }}
                         >
                           <div
@@ -423,7 +235,8 @@ const ECommerceProductsSelect = () => {
                               gap: "20px",
                             }}
                           >
-                            <Component2 />
+                            {/* <Component2 /> */}
+
                             <div
                               style={{
                                 display: "flex",
@@ -433,7 +246,8 @@ const ECommerceProductsSelect = () => {
                                 gap: "259px",
                               }}
                             >
-                              <Component1 />
+                              {/* <Component1 /> */}
+
                               <div
                                 style={{
                                   borderRadius: "10px 0px 10px 0px",
@@ -457,6 +271,7 @@ const ECommerceProductsSelect = () => {
                                   100$
                                 </b>
                               </div>
+
                             </div>
                           </div>
                           <div
@@ -470,6 +285,7 @@ const ECommerceProductsSelect = () => {
                               color: "#666",
                             }}
                           >
+
                             <div
                               style={{
                                 display: "flex",
@@ -488,6 +304,7 @@ const ECommerceProductsSelect = () => {
                                   gap: "10px",
                                 }}
                               >
+
                                 <div
                                   style={{
                                     display: "flex",
@@ -519,6 +336,7 @@ const ECommerceProductsSelect = () => {
                                     SP-240100
                                   </b>
                                 </div>
+
                                 <div
                                   style={{
                                     width: "148px",
@@ -540,6 +358,8 @@ const ECommerceProductsSelect = () => {
                                 }}
                               >{`dolce & gabbana`}</b>
                             </div>
+
+
                             <div
                               style={{
                                 display: "flex",
@@ -589,10 +409,13 @@ const ECommerceProductsSelect = () => {
                               </div>
                             </div>
                           </div>
+
+
                         </div>
-                        
+
                       </div>
                     </div>
+
                     <div
                       style={{
                         flex: "1",
@@ -626,6 +449,7 @@ const ECommerceProductsSelect = () => {
                             gap: "15px",
                           }}
                         >
+                          {/* Color */}
                           <div
                             style={{
                               display: "flex",
@@ -649,6 +473,7 @@ const ECommerceProductsSelect = () => {
                               Color
                             </a>
                           </div>
+                          {/* All */}
                           <div
                             style={{
                               display: "flex",
@@ -669,6 +494,7 @@ const ECommerceProductsSelect = () => {
                               All
                             </a>
                           </div>
+                          {/* Palate */}
                           <div
                             style={{
                               height: "37px",
@@ -789,6 +615,7 @@ const ECommerceProductsSelect = () => {
                           </div>
                         </div>
                       </div>
+
                       <div
                         style={{
                           alignSelf: "stretch",
@@ -960,6 +787,7 @@ const ECommerceProductsSelect = () => {
                               }}
                             >{`dolce & gabbana`}</b>
                           </div>
+
                           <div
                             style={{
                               display: "flex",
@@ -1011,6 +839,9 @@ const ECommerceProductsSelect = () => {
                         </div>
                       </div>
                     </div>
+
+
+                    {/* Brand and rec */}
                     <div
                       style={{
                         flex: "1",
@@ -1127,6 +958,7 @@ const ECommerceProductsSelect = () => {
                           >
                             Recomended
                           </div>
+
                           <div
                             style={{
                               display: "flex",
@@ -1149,6 +981,7 @@ const ECommerceProductsSelect = () => {
                               src="/group-7.svg"
                             />
                           </div>
+
                         </div>
                       </div>
                       <div
@@ -1250,6 +1083,7 @@ const ECommerceProductsSelect = () => {
                               </div>
                             </div>
                           </div>
+
                           <div
                             style={{
                               display: "flex",
@@ -1383,7 +1217,9 @@ const ECommerceProductsSelect = () => {
                         </div>
                       </div>
                     </div>
+
                   </div>
+
                   <div
                     style={{
                       alignSelf: "stretch",
@@ -1619,6 +1455,7 @@ const ECommerceProductsSelect = () => {
                         </div>
                       </div>
                     </div>
+
                     <div
                       style={{
                         height: "437.8px",
@@ -1844,6 +1681,7 @@ const ECommerceProductsSelect = () => {
                         </div>
                       </div>
                     </div>
+
                     <div
                       style={{
                         height: "437.8px",
@@ -2070,6 +1908,7 @@ const ECommerceProductsSelect = () => {
                       </div>
                     </div>
                   </div>
+
                   <div
                     style={{
                       alignSelf: "stretch",
@@ -2091,6 +1930,7 @@ const ECommerceProductsSelect = () => {
                         minWidth: "243.6px",
                       }}
                     >
+
                       <div
                         style={{
                           alignSelf: "stretch",
@@ -2169,6 +2009,7 @@ const ECommerceProductsSelect = () => {
                           </div>
                         </div>
                       </div>
+
                       <div
                         style={{
                           display: "flex",
@@ -2299,7 +2140,9 @@ const ECommerceProductsSelect = () => {
                           </div>
                         </div>
                       </div>
+
                     </div>
+
                     <div
                       style={{
                         flex: "1",
@@ -2402,6 +2245,7 @@ const ECommerceProductsSelect = () => {
                             </div>
                           </div>
                         </div>
+
                         <div
                           style={{
                             width: "221.8px",
@@ -2414,6 +2258,8 @@ const ECommerceProductsSelect = () => {
                             color: "#666",
                           }}
                         >
+
+
                           <div
                             style={{
                               display: "flex",
@@ -2542,6 +2388,9 @@ const ECommerceProductsSelect = () => {
                               </div>
                             </div>
                           </div>
+
+
+
                           <div
                             style={{
                               alignSelf: "stretch",
@@ -2570,6 +2419,8 @@ const ECommerceProductsSelect = () => {
                             </Button>
                           </div>
                         </div>
+
+
                       </div>
                       <img
                         style={{
@@ -2588,313 +2439,22 @@ const ECommerceProductsSelect = () => {
                       />
                     </div>
                   </div>
+
                 </div>
               </div>
+
             </div>
-            <div
-              style={{
-                width: "281px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                padding: "87.9px 0px 0px",
-                boxSizing: "border-box",
-                fontSize: "16px",
-                color: "#232323",
-              }}
-            >
-              <div
-                style={{
-                  alignSelf: "stretch",
-                  height: "700.4px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  padding: "0px 0px 154.4px",
-                  boxSizing: "border-box",
-                  gap: "18.4px",
-                }}
-              >
-                <div
-                  style={{
-                    alignSelf: "stretch",
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                    justifyContent: "flex-start",
-                    padding: "10px 12px 261px",
-                    gap: "179px",
-                    backgroundImage: "url('/image@3x.png')",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "top",
-                    flexShrink: "0",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-end",
-                      padding: "0px 7px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        flex: "1",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        justifyContent: "flex-start",
-                        gap: "5px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "flex-start",
-                          justifyContent: "flex-start",
-                          padding: "0px 0px 0px 18px",
-                          fontSize: "20px",
-                          color: "#090f32",
-                        }}
-                      >
-                        <div
-                          style={{
-                            position: "relative",
-                            textTransform: "capitalize",
-                            fontWeight: "800",
-                          }}
-                        >
-                          Kristine
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          position: "relative",
-                          textTransform: "capitalize",
-                          display: "inline-block",
-                          minWidth: "97px",
-                        }}
-                      >
-                        168 cm / 5'6
-                      </div>
-                      <div
-                        style={{
-                          alignSelf: "stretch",
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "flex-start",
-                          justifyContent: "flex-end",
-                        }}
-                      >
-                        <div
-                          style={{
-                            position: "relative",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          Size: S
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      alignSelf: "stretch",
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "flex-start",
-                      justifyContent: "space-between",
-                      padding: "0px 0px 0px 1px",
-                      gap: "20px",
-                    }}
-                  >
-                    <img
-                      style={{
-                        height: "24px",
-                        width: "14.8px",
-                        position: "relative",
-                        flexShrink: "0",
-                      }}
-                      loading="lazy"
-                      alt=""
-                      src="/vector-2.svg"
-                    />
-                    <img
-                      style={{
-                        height: "24px",
-                        width: "14.8px",
-                        position: "relative",
-                        flexShrink: "0",
-                      }}
-                      loading="lazy"
-                      alt=""
-                      src="/vector-3.svg"
-                    />
-                  </div>
-                </div>
-                <div
-                  style={{
-                    alignSelf: "stretch",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    justifyContent: "flex-start",
-                    gap: "15px",
-                    fontSize: "18px",
-                    color: "#666",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-start",
-                      gap: "10px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "relative",
-                        textTransform: "capitalize",
-                      }}
-                    >
-                      tuck
-                    </div>
-                    <input
-                      style={{ margin: "0", height: "21px", width: "20px" }}
-                      type="checkbox"
-                    />
-                  </div>
-                  <div
-                    style={{
-                      alignSelf: "stretch",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-start",
-                      gap: "10px",
-                      fontSize: "24px",
-                      color: "#232323",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "relative",
-                        textTransform: "capitalize",
-                        fontWeight: "800",
-                      }}
-                    >
-                      items in dressing room
-                    </div>
-                    <div
-                      style={{
-                        alignSelf: "stretch",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        justifyContent: "flex-start",
-                        gap: "14px",
-                        fontSize: "18px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          alignSelf: "stretch",
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "flex-start",
-                          justifyContent: "flex-start",
-                          gap: "32.4px",
-                        }}
-                      >
-                        <div
-                          style={{
-                            position: "relative",
-                            textTransform: "capitalize",
-                            flexShrink: "0",
-                          }}
-                        >
-                          <span style={{ fontWeight: "600" }}>Dress</span>
-                          <span
-                            style={{ color: "#666", whiteSpace: "pre-wrap" }}
-                          >{`,  DOLCE & GABBANA`}</span>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "flex-start",
-                            justifyContent: "flex-start",
-                            padding: "7.9px 0px 0px",
-                          }}
-                        >
-                          <img
-                            style={{
-                              width: "6.8px",
-                              height: "8.2px",
-                              position: "relative",
-                              flexShrink: "0",
-                            }}
-                            loading="lazy"
-                            alt=""
-                            src="/group-49.svg"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          position: "relative",
-                          textDecoration: "underline",
-                          textTransform: "capitalize",
-                          color: "#fd721b",
-                          display: "inline-block",
-                          minWidth: "110px",
-                        }}
-                      >
-                        Clear Styling
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+            {/* Right side Model - DressingRoom */}
+            <ModelDressingRoom />
+
           </section>
+
         </main>
-        <div
-          style={{
-            backgroundColor: "#ff733b",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
-            padding: "18.5px 567px 18.6px 591px",
-            boxSizing: "border-box",
-            maxWidth: "100%",
-          }}
-        >
-          <footer
-            style={{
-              height: "59.1px",
-              width: "1440px",
-              position: "relative",
-              backgroundColor: "#ff733b",
-              display: "none",
-              maxWidth: "100%",
-            }}
-          />
-          <div style={{ position: "relative", fontWeight: "500", zIndex: "1" }}>
-            Copyright © 2024
-          </div>
-        </div>
+
+        {/* footer  */}
+        <Footer />
+
       </div>
     </div>
   );
