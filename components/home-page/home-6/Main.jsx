@@ -83,9 +83,9 @@ export default function MainPage() {
             </div>
 
             {/* Footer */}
-            <footer style={styles.footer}>
-                <p>Copyright © 2024 ib-themesinc.</p>
-            </footer>
+            {/* <footer style={styles.footer}>
+                <p>Copyright © 2024</p>
+            </footer> */}
         </div>
     );
 }
